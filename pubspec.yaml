@@ -53,6 +53,14 @@ flutter:
     - family: OpenSans
       fonts:
         - asset: assets/fonts/OpenSans.ttf
+    - family: Gayathri
+      fonts:
+        - asset: assets/fonts/Gayathri-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Gayathri-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Gayathri-Thin.ttf
+          weight: 100
 
   # To add assets to your application, add an assets section, like this:
   # assets:
