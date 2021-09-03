@@ -1,6 +1,4 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:url_launcher/url_launcher.dart';
@@ -20,6 +18,27 @@ class _ShortFlipContentState extends State<ShortFlipContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Taply'),
+        leading: IconButton(
+          icon: Icon(Icons.grid_view_outlined),
+          onPressed: () {},
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.trending_up_outlined),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.autorenew_outlined),
+            onPressed: () {},
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Container(
           child: Column(
@@ -47,9 +66,8 @@ class _ShortFlipContentState extends State<ShortFlipContent> {
                 ),
               ),
               Flexible(
-                flex: 6,
+                flex: 5,
                 child: Container(
-                  // color: Colors.deepOrange,
                   padding: EdgeInsets.symmetric(
                     horizontal: 8.0,
                     vertical: 8.0,
@@ -67,7 +85,6 @@ class _ShortFlipContentState extends State<ShortFlipContent> {
                     child: Column(
                       children: [
                         Container(
-                          // color: Colors.blue,
                           child: Text(
                             '1569 ആഗസ്റ്റ് 31, ജഹാംഗീറിന്റെ ജനനം',
                             textAlign: TextAlign.start,
@@ -102,6 +119,110 @@ class _ShortFlipContentState extends State<ShortFlipContent> {
                       ],
                     ),
                   ),
+                ),
+              ),
+              Flexible(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 5.0,
+                          ),
+                          child: Icon(
+                            Icons.av_timer_outlined,
+                            size: 16.0,
+                            color: Colors.grey[300],
+                          ),
+                        ),
+                        Text(
+                          "Posted: 10 min. Ago",
+                          style: TextStyle(
+                            color: Colors.grey[500],
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 10.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    Divider(
+                      thickness: 1.0,
+                    ),
+                    SizedBox(
+                      height: 30.0,
+                      width: double.infinity,
+                      child: Row(
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            // padding: EdgeInsets.symmetric(vertical: 8.0),
+                            // alignment: Alignment.center,
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  padding: EdgeInsets.all(0.0),
+                                  icon: Icon(
+                                    Icons.thumb_up_alt_outlined,
+                                    color: Colors.grey,
+                                    size: 20.0,
+                                  ),
+                                ),
+                                Text(
+                                  '0',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18.0,
+                                    fontFamily: 'OpenSans',
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  padding: EdgeInsets.all(0.0),
+                                  icon: Icon(
+                                    Icons.thumb_down_alt_outlined,
+                                    size: 20.0,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Text(
+                                  '0',
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18.0,
+                                    fontFamily: 'OpenSans',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.bookmark_outlined,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.share_outlined,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
