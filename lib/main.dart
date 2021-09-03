@@ -13,7 +13,9 @@ class MyApp extends StatelessWidget {
       // home: LoginScreen(),
       home: ShortFlipContent(),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: ThemeData(
+        primaryColor: Colors.blueAccent,
+      ),
       darkTheme: ThemeData.dark(), // standard dark theme
       themeMode: ThemeMode.system, // device controls theme
     );
