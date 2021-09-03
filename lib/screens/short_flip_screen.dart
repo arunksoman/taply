@@ -1,4 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:html/dom.dart' as dom;
+import 'package:url_launcher/url_launcher.dart';
 
 class ShortFlipContent extends StatefulWidget {
   ShortFlipContent({Key? key}) : super(key: key);
@@ -8,17 +13,20 @@ class ShortFlipContent extends StatefulWidget {
 }
 
 class _ShortFlipContentState extends State<ShortFlipContent> {
+  String htmlData = """<div>
+  മല­യാള­‌ത്തില്‍ തിര­മൊഴി എന്ന പദം‌കൊണ്ടും ഏറെ­ക്കുറെ സാധി­ക്കാ­മെന്നു വിചാരി­ക്കുന്നു. ഭാഷ­യുടെ പരിണാമ­ചരിത്രം. ഭാഷ‌യ്‌ക്ക്‌ വാമൊഴി‌­യെന്നും വരമൊഴി‌­യെന്നും രണ്ടു വക­ഭേദ‌ങ്ങള്‍ എന്നാണ്‌ ഭാഷാ­വിദ്യാര്‍ത്ഥികളുടെ ആദ്യപാഠ­ങ്ങളിലൊന്ന്‌. വാ­കൊണ്ടു മൊഴി­യുന്നത്‌ വാമൊഴി. വരച്ചു­കാട്ടുന്നത്‌ വരമൊഴി. <a href='https://github.com'>കംപ്യൂട്ടറിന്റെ</a> സഹായ‌­ത്തോടെ ഭാഷ­യ്‌ക്കു ലഭിക്കുന്ന അധിക‌‌­മാന­ത്തെ­യാണ്.‌',
+  ഇവിടെ തിര­മൊഴി എന്ന പദംകൊണ്ട്‌ വിവ­ക്ഷിക്കുന്നത്‌. ഒരൊറ്റമതമുണ്ടുലകിന്നുയിരാം പ്രേമ,മതൊന്നല്ലോ പരക്കെ നമ്മെ പാലമൃതൂട്ടും പാർവണശശിബിംബം.
+</div>""";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
-          child: Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                GestureDetector(
+        child: Container(
+          child: Column(
+            children: [
+              Flexible(
+                flex: 4,
+                child: GestureDetector(
                   onVerticalDragUpdate: (details) {
                     int sensitivity = 1;
                     if (details.delta.dy > sensitivity) {
@@ -27,61 +35,76 @@ class _ShortFlipContentState extends State<ShortFlipContent> {
                       print("Swipe up detected");
                     }
                   },
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    // heightFactor: 1.0,
+                  child: Container(
+                    // flex: 4,
+                    // constraints: BoxConstraints(),
                     child: Image.network(
-                        'https://d27bygd3qv5fha.cloudfront.net/Aug-31-2021/612e2c6796e1654038924e58/August-31-1569-Jahangir-is-born-2021-Aug-31-18-47-43-general.jpeg'),
+                      'https://d27bygd3qv5fha.cloudfront.net/Aug-31-2021/612e2c6796e1654038924e58/August-31-1569-Jahangir-is-born-2021-Aug-31-18-47-43-general.jpeg',
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
-                GestureDetector(
-                  onVerticalDragUpdate: (details) {
-                    int sensitivity = 5;
-                    if (details.delta.dy > sensitivity) {
-                      print("Swipe down detected");
-                    } else if (details.delta.dy < -sensitivity) {
-                      print("Swipe up detected");
-                    }
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
+              ),
+              Flexible(
+                flex: 6,
+                child: Container(
+                  // color: Colors.deepOrange,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                    vertical: 8.0,
+                  ),
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onVerticalDragUpdate: (details) {
+                      int sensitivity = 8;
+                      if (details.delta.dy > sensitivity) {
+                        print("Swipe down detected");
+                      } else if (details.delta.dy < -sensitivity) {
+                        print("Swipe up detected");
+                      }
+                    },
                     child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          // heightFactor: 1.0,
+                        Container(
+                          // color: Colors.blue,
                           child: Text(
                             '1569 ആഗസ്റ്റ് 31, ജഹാംഗീറിന്റെ ജനനം',
+                            textAlign: TextAlign.start,
                             style: TextStyle(
                               fontFamily: 'Gayathri',
                               fontWeight: FontWeight.w700,
                               fontSize: 28,
-                              height: 1.4,
                             ),
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.center,
-                          heightFactor: 1.0,
-                          child: Text(
-                            'മുഗൾ സാമ്രാജ്യത്തിലെ നാലാമത്തെ ചക്രവർത്തിയാണ്‌ ജഹാംഗീർ (പൂർണ്ണനാമം:നൂറുദ്ദീൻ സലീം ജഹാംഗീർ) (1569 ഓഗസ്റ്റ് 31 – 1627 ഒക്ടോബർ 28). 1605 മുതൽ തന്റെ മരണം വരെ മുഗൾ സാമ്രാജ്യത്തിന്റെ ചക്രവർത്തിയായിരുന്നു. ലോകജേതാവ് എന്നാണ്‌ ജഹാംഗീർ എന്ന പേരിന്റെ അർത്ഥം.',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
+                        new Html(
+                          data: htmlData,
+                          onLinkTap: (String? url,
+                              RenderContext context,
+                              Map<String, String> attributes,
+                              dom.Element? element) {
+                            launch(
+                              'http://github.com',
+                            );
+                            //open URL in webview, or launch URL in browser, or any other logic here
+                          },
+                          style: {
+                            "body": Style(
                               fontFamily: 'Gayathri',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
-                              height: 1.4,
-                            ),
-                          ),
+                              fontSize: FontSize(18.0),
+                              lineHeight: LineHeight(1.4),
+                              textOverflow: TextOverflow.ellipsis,
+                              maxLines: 10,
+                            )
+                          },
                         ),
                       ],
                     ),
                   ),
-                )
-              ],
-            ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
